@@ -24,6 +24,37 @@ This document is for the basic setup steps after doing a 'Minimal Install' of Ro
     sudo dnf update
     sudo reboot
     ```
+
+1. Install and configure `vim`:
+
+    ```shell script
+    sudo dnf install vim-enhanced
+    ```
+
+    Edit `~/.vimrc` and `/root/.vimrc`:
+
+    ```text
+    set noincsearch
+    set tabstop=4
+    set shiftwidth=4
+    set expandtab
+    set hlsearch
+    syntax on
+
+    autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
+    autocmd Filetype *.config setlocal ts=2 sw=2 expandtab
+
+    if has("autocmd")
+      " Enable file type detection
+      filetype on
+
+      " Syntax of these languages is fussy over tabs Vs spaces
+      autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+      " Treat .rss files as XML
+      autocmd BufNewFile,BufRead *.rss setfiletype xml
+    endif
+    ```
    
 1. Enable automatic updates:
 
