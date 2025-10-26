@@ -1,6 +1,6 @@
-# Rocky Linux 9 Post Install
+# Enterprise Linux 9 Post Install
 
-This document is for the basic setup steps after doing a 'Minimal Install' of Rocky Linux 9.
+This document is for the basic setup steps after doing a 'Minimal Install' of Enterprise Linux 9.
 
 1. Copy your SSH key:
 
