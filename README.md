@@ -88,3 +88,29 @@ This document is for the basic setup steps after doing a 'Minimal Install' of En
     sudo sed -i 's/\(#\)\{0,1\}Banner.*/Banner \/etc\/issue.net/' /etc/ssh/sshd_config
     sudo systemctl restart sshd
     ```
+
+1. Configure outbound mail with Postfix:
+
+    ```shell script
+    sudo dnf install postfix
+    ```
+
+    Edit `/etc/postfix/main.cf`, and change these settings:
+    ```text
+    myhostname = host.example.com
+    mydomain = example.com
+    myorigin = $mydomain
+    inet_interfaces = all
+    inet_protocols = ipv4
+    mynetworks_style = subnet
+    relayhost = [smtp.mailgun.org]:587 # Or your upstream mail provider
+    smtp_sasl_auth_enable = yes
+    smtp_sasl_password_maps = static:postmaster@example.com:3x4mp13h45h
+    smtp_sasl_security_options = noanonymous
+    smtp_tls_note_starttls_offer = yes
+    ```
+
+    ```shell script
+    sudo systemctl enable --now postfix
+    ```
+
