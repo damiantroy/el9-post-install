@@ -92,10 +92,12 @@ This document is for the basic setup steps after doing a 'Minimal Install' of En
 1. Configure outbound mail with Postfix:
 
     ```shell script
-    sudo dnf install postfix
+    sudo dnf install postfix cyrus-sasl cyrus-sasl-plain cyrus-sasl-lib
     ```
 
-    Edit `/etc/postfix/main.cf`, and change these settings:
+    This is example changes to `/etc/postfix/main.cf` for using
+    [Mailgun](https://www.mailgun.com/):
+
     ```text
     myhostname = host.example.com
     mydomain = example.com
